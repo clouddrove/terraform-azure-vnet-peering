@@ -20,10 +20,10 @@ module "vnet_peering" {
   label_order         = ["environment", "name"]
   enabled_peering     = true
   resource_group_name = module.resource_group.resource_group_name
-  vnet_1_name         = azurerm_virtual_network.example1.name
-  vnet_1_id           = azurerm_virtual_network.example1.id
+  vnet_1_name         = ""
+  vnet_1_id           = ""
 
-  vnet_2_name = azurerm_virtual_network.example.name
-  vnet_2_id   = azurerm_virtual_network.example.id
+  vnet_2_name = ""
+  vnet_2_id   = ""
 
 }
