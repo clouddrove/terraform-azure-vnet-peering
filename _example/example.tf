@@ -3,13 +3,13 @@ provider "azurerm" {
 }
 
 module "resource_group" {
-  source  = "clouddrove/resource-group/azure"
-  version = "1.0.1"
+  source      = "clouddrove/resource-group/azure"
+  version     = "1.0.1"
 
-  name        = "example"
+  name     = "example"
   environment = "test"
   label_order = ["name", "environment"]
-  location    = "North Europe"
+  location = "North Europe"
 }
 
 module "vnet_peering" {
@@ -18,9 +18,9 @@ module "vnet_peering" {
 
   enabled_peering             = true
   resource_group_name         = module.resource_group.resource_group_name
-  virtual_network_name        = ""
-  remote_virtual_network_id   = ""
-  remote_virtual_network_name = ""
+  virtual_network_name        = module.vnet.vnet_name[0]
+  remote_virtual_network_id   = [module.vnet_remote.vnet_id[0]]
+  remote_virtual_network_name = [module.vnet_remote.vnet_name[0]]
 }
 
 module "vnet_peering_back" {
@@ -29,7 +29,7 @@ module "vnet_peering_back" {
 
   enabled_peering             = true
   resource_group_name         = module.resource_group.resource_group_name
-  virtual_network_name        = ""
-  remote_virtual_network_id   = ""
-  remote_virtual_network_name = ""
+  virtual_network_name        = module.vnet_remote.vnet_name[0]
+  remote_virtual_network_id   = [module.vnet.vnet_id[0]]
+  remote_virtual_network_name = [module.vnet.vnet_name[0]]
 }
