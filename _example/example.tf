@@ -3,13 +3,13 @@ provider "azurerm" {
 }
 
 module "resource_group" {
-  source      = "clouddrove/resource-group/azure"
-  version     = "1.0.1"
+  source  = "clouddrove/resource-group/azure"
+  version = "1.0.1"
 
-  name     = "example"
+  name        = "example"
   environment = "test"
   label_order = ["name", "environment"]
-  location = "North Europe"
+  location    = "North Europe"
 }
 
 
