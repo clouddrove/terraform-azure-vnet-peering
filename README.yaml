@@ -26,6 +26,7 @@ badges:
 #  description of this project
 description: |-
   Terraform module to create vnet-peering resource on AZURE.
+
 # extra content
 include:
   - "terraform.md"
@@ -49,4 +50,4 @@ usage: |-
    vnet_2_name                 = module.vnet_remote.vnet_name[0]
    vnet_2_id                   = module.vnet_remote.vnet_id[0]
    }
-  ```
+    ```
