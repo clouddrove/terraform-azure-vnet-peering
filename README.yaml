@@ -1,0 +1,57 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+
+# Name of this project
+name: Terraform AZURE VNET-PEERING
+
+# License of this project
+license: "APACHE"
+
+# Canonical GitHub repo
+github_repo: clouddrove/terraform-azure-vnet-peering
+
+# Badges to display
+badges:
+  - name: "Terraform"
+    image: "https://img.shields.io/badge/Terraform-v1.1.7-green"
+    url: "https://www.terraform.io"
+  - name: "Licence"
+    image: "https://img.shields.io/badge/License-APACHE-blue.svg"
+    url: "LICENSE.md"
+
+#  description of this project
+description: |-
+  Terraform module to create VNET-PEERING resource on AZURE.
+# extra content
+include:
+  - "terraform.md"
+
+# How to use this project
+# yamllint disable rule:line-length
+usage: |-
+  ### Simple Example
+  Here is an example of how you can use this module in your inventory structure:
+  ```hcl
+
+  module "vnet_peering" {
+  source      = "clouddrove/vnet-peering/azure"
+
+  enabled_peering     = true
+  resource_group_name = module.resource_group.resource_group_name
+
+  allow_gateway_transit_vnet1 = false
+  use_remote_gateways_vnet1   = false
+  allow_gateway_transit_vnet2 = false
+  use_remote_gateways_vnet2   = false
+  vnet_1_name                 = module.vnet.vnet_name[0]
+  vnet_1_id                   = module.vnet.vnet_id[0]
+  vnet_2_name                 = module.vnet_remote.vnet_name[0]
+  vnet_2_id                   = module.vnet_remote.vnet_id[0]
+
+}
+
+  ```
