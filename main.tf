@@ -10,7 +10,7 @@ locals {
 # enable global peering between the two virtual network
 resource "azurerm_virtual_network_peering" "peering" {
   count                        = var.enabled_peering ? 1 : 0
-  name                         = format("%s-vnet-peering-%s", var.vnet_1_name, var.vnet_2_name)
+  name                         = format("%s-peering-%s", var.vnet_1_name, var.vnet_2_name)
   resource_group_name          = local.resource_group_name
   virtual_network_name         = var.vnet_1_name
   remote_virtual_network_id    = var.vnet_2_id
@@ -23,7 +23,7 @@ resource "azurerm_virtual_network_peering" "peering" {
 # enable global peering between the two virtual network
 resource "azurerm_virtual_network_peering" "peering_back" {
   count                        = var.enabled_peering ? 1 : 0
-  name                         = format("%s-vnet-peering-%s", var.vnet_2_name, var.vnet_1_name)
+  name                         = format("%s-peering-%s", var.vnet_2_name, var.vnet_1_name)
   resource_group_name          = local.resource_group_name
   virtual_network_name         = var.vnet_2_name
   remote_virtual_network_id    = var.vnet_1_id
