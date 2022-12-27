@@ -37,21 +37,27 @@ variable "enabled_peering" {
   description = "Set to false to prevent the module from creating any resources."
 }
 
-variable "virtual_network_name" {
+variable "vnet_1_name" {
   type        = string
   default     = ""
   description = "The name of the virtual network. Changing this forces a new resource to be created."
 }
 
-variable "remote_virtual_network_id" {
-  type        = list(any)
-  default     = []
+variable "vnet_2_id" {
+  type        = string
+  default     = ""
   description = "The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created."
 }
 
-variable "remote_virtual_network_name" {
-  type        = list(any)
-  default     = []
+variable "vnet_1_id" {
+  type        = string
+  default     = ""
+  description = "The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created."
+}
+
+variable "vnet_2_name" {
+  type        = string
+  default     = ""
   description = "The name of the remote virtual network."
 }
 
@@ -63,17 +69,29 @@ variable "allow_virtual_network_access" {
 
 variable "allow_forwarded_traffic" {
   type        = bool
-  default     = false
+  default     = true
   description = "Controls if forwarded traffic from VMs in the remote virtual network is allowed"
 }
 
-variable "allow_gateway_transit" {
+variable "allow_gateway_transit_vnet1" {
   type        = bool
   default     = false
   description = "Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network."
 }
 
-variable "use_remote_gateways" {
+variable "allow_gateway_transit_vnet2" {
+  type        = bool
+  default     = false
+  description = "Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network."
+}
+
+variable "use_remote_gateways_vnet1" {
+  type        = bool
+  default     = false
+  description = "Controls if remote gateways can be used on the local virtual network"
+}
+
+variable "use_remote_gateways_vnet2" {
   type        = bool
   default     = false
   description = "Controls if remote gateways can be used on the local virtual network"
