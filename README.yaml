@@ -38,10 +38,8 @@ usage: |-
   ```hcl
   module "vnet_peering" {
    source      = "clouddrove/vnet-peering/azure"
-
    enabled_peering     = true
    resource_group_name = module.resource_group.resource_group_name
-
    allow_gateway_transit_vnet1 = false
    use_remote_gateways_vnet1   = false
    allow_gateway_transit_vnet2 = false
@@ -51,4 +49,4 @@ usage: |-
    vnet_2_name                 = module.vnet_remote.vnet_name[0]
    vnet_2_id                   = module.vnet_remote.vnet_id[0]
    }
-    ```
+  ```
