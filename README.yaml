@@ -25,7 +25,7 @@ badges:
 
 #  description of this project
 description: |-
-  Terraform module to create VNET-PEERING resource on AZURE.
+  Terraform module to create vnet-peering resource on AZURE.
 # extra content
 include:
   - "terraform.md"
@@ -38,20 +38,18 @@ usage: |-
   ```hcl
 
   module "vnet_peering" {
-  source      = "clouddrove/vnet-peering/azure"
+   source      = "clouddrove/vnet-peering/azure"
 
-  enabled_peering     = true
-  resource_group_name = module.resource_group.resource_group_name
+   enabled_peering     = true
+   resource_group_name = module.resource_group.resource_group_name
 
-  allow_gateway_transit_vnet1 = false
-  use_remote_gateways_vnet1   = false
-  allow_gateway_transit_vnet2 = false
-  use_remote_gateways_vnet2   = false
-  vnet_1_name                 = module.vnet.vnet_name[0]
-  vnet_1_id                   = module.vnet.vnet_id[0]
-  vnet_2_name                 = module.vnet_remote.vnet_name[0]
-  vnet_2_id                   = module.vnet_remote.vnet_id[0]
-
-}
-
-  ```
+   allow_gateway_transit_vnet1 = false
+   use_remote_gateways_vnet1   = false
+   allow_gateway_transit_vnet2 = false
+   use_remote_gateways_vnet2   = false
+   vnet_1_name                 = module.vnet.vnet_name[0]
+   vnet_1_id                   = module.vnet.vnet_id[0]
+   vnet_2_name                 = module.vnet_remote.vnet_name[0]
+   vnet_2_id                   = module.vnet_remote.vnet_id[0]
+   }
+    ```
