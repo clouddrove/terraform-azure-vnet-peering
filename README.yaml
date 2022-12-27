@@ -38,9 +38,9 @@ usage: |-
   Here is an example of how you can use this module in your inventory structure:
   ```hcl
   module "vnet_peering" {
-   source      = "clouddrove/vnet-peering/azure"
-   enabled_peering     = true
-   resource_group_name = module.resource_group.resource_group_name
+   source                      = "clouddrove/vnet-peering/azure"
+   enabled_peering             = true
+   resource_group_name         = module.resource_group.resource_group_name
    allow_gateway_transit_vnet1 = false
    use_remote_gateways_vnet1   = false
    allow_gateway_transit_vnet2 = false
