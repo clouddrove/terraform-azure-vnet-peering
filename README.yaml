@@ -50,4 +50,4 @@ usage: |-
    vnet_2_name                 = module.vnet_remote.vnet_name[0]
    vnet_2_id                   = module.vnet_remote.vnet_id[0]
    }
-    ```
+   ```
