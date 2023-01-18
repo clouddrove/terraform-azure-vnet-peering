@@ -97,8 +97,20 @@ variable "use_remote_gateways_vnet2" {
   description = "Controls if remote gateways can be used on the local virtual network"
 }
 
-variable "resource_group_name" {
+variable "resource_group_1_name" {
   type        = string
   default     = ""
-  description = "The name of an existing resource group to be imported."
+  description = "The name of 1st existing resource group to be imported."
+}
+
+variable "resource_group_2_name" {
+  type        = string
+  default     = ""
+  description = "The name of 2nd existing resource group to be imported."
+}
+
+variable "different_rg" {
+  type        = bool
+  default     = false
+  description = "Flag to tell whether peering is to be done in same in resource group or deifferent resource group "
 }
