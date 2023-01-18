@@ -72,19 +72,21 @@ Here are some examples of how you can use this module in your inventory structur
 ### Default vnet-peering
 ```hcl
 module "vnet_peering" {
-source                      = "clouddrove/vnet-peering/azure"
-version                     = "1.0.0"
-depends_on                  = [module.resource_group]
-enabled_peering             = true
-resource_group_name         = module.resource_group.resource_group_name
-allow_gateway_transit_vnet1 = false
-use_remote_gateways_vnet1   = false
-allow_gateway_transit_vnet2 = false
-use_remote_gateways_vnet2   = false
-vnet_1_name                 = module.vnet.vnet_name[0]
-vnet_1_id                   = module.vnet.vnet_id[0]
-vnet_2_name                 = module.vnet_remote.vnet_name[0]
-vnet_2_id                   = module.vnet_remote.vnet_id[0]
+ source                      = "clouddrove/vnet-peering/azure"
+ version                     = "1.0.0"
+ depends_on                  = [module.resource_group_1, module.resource_group_2]
+ enabled_peering             = true
+ resource_group_1_name       = module.resource_group_1.resource_group_name
+ resource_group_2_name       = module.resource_group_2.resource_group_name
+ allow_gateway_transit_vnet1 = false
+ use_remote_gateways_vnet1   = false
+ allow_gateway_transit_vnet2 = false
+ use_remote_gateways_vnet2   = false
+ different_rg                = true
+ vnet_1_name                 = module.vnet.vnet_name[0]
+ vnet_1_id                   = module.vnet.vnet_id[0]
+ vnet_2_name                 = module.vnet_remote.vnet_name[0]
+ vnet_2_id                   = module.vnet_remote.vnet_id[0]
 }
  ```
 
@@ -102,12 +104,14 @@ vnet_2_id                   = module.vnet_remote.vnet_id[0]
 | allow\_gateway\_transit\_vnet2 | Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. | `bool` | `false` | no |
 | allow\_virtual\_network\_access | Controls if the VMs in the remote virtual network can access VMs in the local virtual network. | `bool` | `true` | no |
 | attributes | Additional attributes (e.g. `1`). | `list(string)` | `[]` | no |
+| different\_rg | Flag to tell whether peering is to be done in same in resource group or deifferent resource group | `bool` | `false` | no |
 | enabled\_peering | Set to false to prevent the module from creating any resources. | `bool` | `false` | no |
 | environment | Environment (e.g. `prod`, `dev`, `staging`). | `string` | `""` | no |
 | label\_order | Label order, e.g. sequence of application name and environment `name`,`environment`,'attribute' [`webserver`,`qa`,`devops`,`public`,] . | `list(any)` | `[]` | no |
 | name | Name  (e.g. `app` or `cluster`). | `string` | `""` | no |
 | repository | Terraform current module repo | `string` | `""` | no |
-| resource\_group\_name | The name of an existing resource group to be imported. | `string` | `""` | no |
+| resource\_group\_1\_name | The name of 1st existing resource group to be imported. | `string` | `""` | no |
+| resource\_group\_2\_name | The name of 2nd existing resource group to be imported. | `string` | `""` | no |
 | use\_remote\_gateways\_vnet1 | Controls if remote gateways can be used on the local virtual network | `bool` | `false` | no |
 | use\_remote\_gateways\_vnet2 | Controls if remote gateways can be used on the local virtual network | `bool` | `false` | no |
 | vnet\_1\_id | The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created. | `string` | `""` | no |
