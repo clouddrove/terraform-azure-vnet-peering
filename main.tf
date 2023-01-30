@@ -7,10 +7,11 @@ resource "azurerm_virtual_network_peering" "peering" {
   virtual_network_name         = var.vnet_1_name
   remote_virtual_network_id    = var.vnet_2_id
   allow_virtual_network_access = var.allow_virtual_network_access
-  allow_forwarded_traffic      = var.allow_forwarded_traffic
+  allow_forwarded_traffic      = var.allow_forwarded_traffic_vnet1
   allow_gateway_transit        = var.allow_gateway_transit_vnet1
   use_remote_gateways          = var.use_remote_gateways_vnet1
 }
+
 
 # enable global peering between the two virtual network
 resource "azurerm_virtual_network_peering" "peering_back" {
@@ -20,7 +21,7 @@ resource "azurerm_virtual_network_peering" "peering_back" {
   virtual_network_name         = var.vnet_2_name
   remote_virtual_network_id    = var.vnet_1_id
   allow_virtual_network_access = var.allow_virtual_network_access
-  allow_forwarded_traffic      = var.allow_forwarded_traffic
+  allow_forwarded_traffic      = var.allow_forwarded_traffic_vnet2
   allow_gateway_transit        = var.allow_gateway_transit_vnet2
   use_remote_gateways          = var.use_remote_gateways_vnet2
 }
