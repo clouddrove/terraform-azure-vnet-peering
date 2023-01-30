@@ -72,21 +72,23 @@ Here are some examples of how you can use this module in your inventory structur
 ### Default vnet-peering
 ```hcl
 module "vnet_peering" {
- source                      = "clouddrove/vnet-peering/azure"
- version                     = "1.0.0"
- depends_on                  = [module.resource_group_1, module.resource_group_2]
- enabled_peering             = true
- resource_group_1_name       = module.resource_group_1.resource_group_name
- resource_group_2_name       = module.resource_group_2.resource_group_name
- allow_gateway_transit_vnet1 = false
- use_remote_gateways_vnet1   = false
- allow_gateway_transit_vnet2 = false
- use_remote_gateways_vnet2   = false
- different_rg                = true
- vnet_1_name                 = module.vnet.vnet_name[0]
- vnet_1_id                   = module.vnet.vnet_id[0]
- vnet_2_name                 = module.vnet_remote.vnet_name[0]
- vnet_2_id                   = module.vnet_remote.vnet_id[0]
+ source                        = "clouddrove/vnet-peering/azure"
+ version                       = "1.0.0"
+ depends_on                    = [module.resource_group_1, module.resource_group_2]
+ enabled_peering               = true
+ resource_group_1_name         = module.resource_group_1.resource_group_name
+ resource_group_2_name         = module.resource_group_2.resource_group_name
+ allow_gateway_transit_vnet1   = false
+ use_remote_gateways_vnet1     = false
+ allow_gateway_transit_vnet2   = false
+ use_remote_gateways_vnet2     = false
+ allow_forwarded_traffic_vnet1 = false
+ allow_forwarded_traffic_vnet2 = false
+ different_rg                  = true
+ vnet_1_name                   = module.vnet.vnet_name[0]
+ vnet_1_id                     = module.vnet.vnet_id[0]
+ vnet_2_name                   = module.vnet_remote.vnet_name[0]
+ vnet_2_id                     = module.vnet_remote.vnet_id[0]
 }
  ```
 
@@ -99,7 +101,8 @@ module "vnet_peering" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| allow\_forwarded\_traffic | Controls if forwarded traffic from VMs in the remote virtual network is allowed | `bool` | `true` | no |
+| allow\_forwarded\_traffic\_vnet1 | Controls if forwarded traffic from VMs in the remote virtual network is allowed | `bool` | `false` | no |
+| allow\_forwarded\_traffic\_vnet2 | Controls if forwarded traffic from VMs in the remote virtual network is allowed | `bool` | `false` | no |
 | allow\_gateway\_transit\_vnet1 | Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. | `bool` | `false` | no |
 | allow\_gateway\_transit\_vnet2 | Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. | `bool` | `false` | no |
 | allow\_virtual\_network\_access | Controls if the VMs in the remote virtual network can access VMs in the local virtual network. | `bool` | `true` | no |
