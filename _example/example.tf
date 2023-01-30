@@ -62,14 +62,16 @@ module "vnet_peering" {
   resource_group_1_name = module.resource_group_1.resource_group_name
   resource_group_2_name = module.resource_group_2.resource_group_name
 
-  allow_gateway_transit_vnet1 = false
-  use_remote_gateways_vnet1   = false
-  allow_gateway_transit_vnet2 = false
-  use_remote_gateways_vnet2   = false
-  different_rg                = true
-  vnet_1_name                 = module.vnet.vnet_name[0]
-  vnet_1_id                   = module.vnet.vnet_id[0]
-  vnet_2_name                 = module.vnet_remote.vnet_name[0]
-  vnet_2_id                   = module.vnet_remote.vnet_id[0]
+  allow_gateway_transit_vnet1   = false
+  use_remote_gateways_vnet1     = false
+  allow_gateway_transit_vnet2   = false
+  use_remote_gateways_vnet2     = false
+  allow_forwarded_traffic_vnet1 = false
+  allow_forwarded_traffic_vnet2 = false
+  different_rg                  = true
+  vnet_1_name                   = module.vnet.vnet_name[0]
+  vnet_1_id                     = module.vnet.vnet_id[0]
+  vnet_2_name                   = module.vnet_remote.vnet_name[0]
+  vnet_2_id                     = module.vnet_remote.vnet_id[0]
 
 }

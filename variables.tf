@@ -67,9 +67,15 @@ variable "allow_virtual_network_access" {
   description = "Controls if the VMs in the remote virtual network can access VMs in the local virtual network."
 }
 
-variable "allow_forwarded_traffic" {
+variable "allow_forwarded_traffic_vnet1" {
   type        = bool
-  default     = true
+  default     = false
+  description = "Controls if forwarded traffic from VMs in the remote virtual network is allowed"
+}
+
+variable "allow_forwarded_traffic_vnet2" {
+  type        = bool
+  default     = false
   description = "Controls if forwarded traffic from VMs in the remote virtual network is allowed"
 }
 
