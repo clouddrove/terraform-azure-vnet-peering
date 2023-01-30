@@ -12,6 +12,7 @@ resource "azurerm_virtual_network_peering" "peering" {
   use_remote_gateways          = var.use_remote_gateways_vnet1
 }
 
+
 # enable global peering between the two virtual network
 resource "azurerm_virtual_network_peering" "peering_back" {
   count                        = var.enabled_peering ? 1 : 0
