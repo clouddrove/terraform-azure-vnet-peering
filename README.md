@@ -74,21 +74,32 @@ Here are some examples of how you can use this module in your inventory structur
 module "vnet_peering" {
  source                        = "clouddrove/vnet-peering/azure"
  version                       = "1.0.0"
- depends_on                    = [module.resource_group_1, module.resource_group_2]
  enabled_peering               = true
  resource_group_1_name         = module.resource_group_1.resource_group_name
  resource_group_2_name         = module.resource_group_2.resource_group_name
- allow_gateway_transit_vnet1   = false
- use_remote_gateways_vnet1     = false
- allow_gateway_transit_vnet2   = false
- use_remote_gateways_vnet2     = false
- allow_forwarded_traffic_vnet1 = false
- allow_forwarded_traffic_vnet2 = false
+
  different_rg                  = true
  vnet_1_name                   = module.vnet.vnet_name[0]
  vnet_1_id                     = module.vnet.vnet_id[0]
  vnet_2_name                   = module.vnet_remote.vnet_name[0]
  vnet_2_id                     = module.vnet_remote.vnet_id[0]
+}
+ ```
+
+  ### vnet-peering in different subscription
+```hcl
+module "vnet_peering" {
+ source                        = "clouddrove/vnet-peering/azure"
+ version                       = "1.0.0"
+ enabled_diff_subs_peering     = true
+ resource_group_1_name         = module.resource_group_1.resource_group_name
+ diff_subs_resource_group_name = data.azurerm_resource_group.mgmt-rg.name
+
+ alias_subs_id                 = "82XXXXXXXXXXXXXXXXXXXXa80"
+ vnet_1_name                   = module.vnet.vnet_name[0]
+ vnet_1_id                     = module.vnet.vnet_id[0]
+ vnet_diff_subs_name           = data.azurerm_virtual_network.mgmt-staging-vnet.name
+ vnet_diff_subs_id             = data.azurerm_virtual_network.mgmt-staging-vnet.id
 }
  ```
 
@@ -101,13 +112,18 @@ module "vnet_peering" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| alias\_subs\_id | Alias for remote provider in module. | `string` | `""` | no |
 | allow\_forwarded\_traffic\_vnet1 | Controls if forwarded traffic from VMs in the remote virtual network is allowed | `bool` | `false` | no |
 | allow\_forwarded\_traffic\_vnet2 | Controls if forwarded traffic from VMs in the remote virtual network is allowed | `bool` | `false` | no |
+| allow\_forwarded\_traffic\_vnet\_diff\_subs | Controls if forwarded traffic from VMs in the remote virtual network is allowed | `bool` | `false` | no |
 | allow\_gateway\_transit\_vnet1 | Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. | `bool` | `false` | no |
 | allow\_gateway\_transit\_vnet2 | Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. | `bool` | `false` | no |
+| allow\_gateway\_transit\_vnet\_diff\_subs | Controls gatewayLinks can be used in the different subscription virtual network’s link to the local virtual network. | `bool` | `false` | no |
 | allow\_virtual\_network\_access | Controls if the VMs in the remote virtual network can access VMs in the local virtual network. | `bool` | `true` | no |
 | attributes | Additional attributes (e.g. `1`). | `list(string)` | `[]` | no |
-| different\_rg | Flag to tell whether peering is to be done in same in resource group or deifferent resource group | `bool` | `false` | no |
+| diff\_subs\_resource\_group\_name | The name of remote resource group to be imported. | `string` | `""` | no |
+| different\_rg | Flag to tell whether peering is to be done in same in resource group or different resource group | `bool` | `false` | no |
+| enabled\_diff\_subs\_peering | n/a | `bool` | `false` | no |
 | enabled\_peering | Set to false to prevent the module from creating any resources. | `bool` | `false` | no |
 | environment | Environment (e.g. `prod`, `dev`, `staging`). | `string` | `""` | no |
 | label\_order | Label order, e.g. sequence of application name and environment `name`,`environment`,'attribute' [`webserver`,`qa`,`devops`,`public`,] . | `list(any)` | `[]` | no |
@@ -117,10 +133,13 @@ module "vnet_peering" {
 | resource\_group\_2\_name | The name of 2nd existing resource group to be imported. | `string` | `""` | no |
 | use\_remote\_gateways\_vnet1 | Controls if remote gateways can be used on the local virtual network | `bool` | `false` | no |
 | use\_remote\_gateways\_vnet2 | Controls if remote gateways can be used on the local virtual network | `bool` | `false` | no |
+| use\_remote\_gateways\_vnet\_diff\_subs | Controls if remote gateways can be used on the different subscription virtual network | `bool` | `false` | no |
 | vnet\_1\_id | The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created. | `string` | `""` | no |
 | vnet\_1\_name | The name of the virtual network. Changing this forces a new resource to be created. | `string` | `""` | no |
 | vnet\_2\_id | The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created. | `string` | `""` | no |
 | vnet\_2\_name | The name of the remote virtual network. | `string` | `""` | no |
+| vnet\_diff\_subs\_id | The id of the remote virtual network. | `string` | `""` | no |
+| vnet\_diff\_subs\_name | The name of the remote virtual network. | `string` | `""` | no |
 
 ## Outputs
 
@@ -130,6 +149,8 @@ module "vnet_peering" {
 | vnet\_peer\_1\_name | The name of the newly created virtual network peering in on first virtual netowork. |
 | vnet\_peer\_2\_id | The id of the newly created virtual network peering in on second virtual netowork. |
 | vnet\_peer\_2\_name | The name of the newly created virtual network peering in on second virtual netowork. |
+| vnet\_peer\_diff\_subs\_id | The id of the newly created virtual network peering in on different subscription virtual netowork. |
+| vnet\_peer\_diff\_subs\_name | The name of the newly created virtual network peering in on different subscription virtual netowork. |
 
 
 
