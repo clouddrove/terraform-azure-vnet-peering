@@ -4,7 +4,7 @@ provider "azurerm" {
 
 module "resource_group_1" {
   source  = "clouddrove/resource-group/azure"
-  version = "1.0.1"
+  version = "1.0.2"
 
   name        = "example_1"
   environment = "test"
@@ -14,7 +14,7 @@ module "resource_group_1" {
 
 module "resource_group_2" {
   source  = "clouddrove/resource-group/azure"
-  version = "1.0.1"
+  version = "1.0.2"
 
   name        = "example_2"
   environment = "test"
