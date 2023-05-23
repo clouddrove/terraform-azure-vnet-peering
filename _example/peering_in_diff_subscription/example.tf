@@ -2,11 +2,11 @@ provider "azurerm" {
   features {}
 }
 
-module "resource_group_1" {
+module "resource_group" {
   source  = "clouddrove/resource-group/azure"
   version = "1.0.2"
 
-  name        = "vnet"
+  name        = "app"
   environment = "test"
   label_order = ["name", "environment"]
   location    = "North Europe"
@@ -18,14 +18,11 @@ module "vnet" {
   source  = "clouddrove/vnet/azure"
   version = "1.0.2"
 
-  name        = "app"
-  environment = "example"
-  label_order = ["name", "environment"]
-
-  resource_group_name = module.resource_group_1.resource_group_name
-  location            = module.resource_group_1.resource_group_location
-  address_space       = "10.0.0.0/24"
-  enable_ddos_pp      = false
+  name                = "app"
+  environment         = "test"
+  resource_group_name = module.resource_group.resource_group_name
+  location            = module.resource_group.resource_group_location
+  address_space       = "10.0.0.0/16"
 }
 
 
@@ -50,7 +47,7 @@ module "vnet_peering" {
   source = "../.."
 
   enabled_diff_subs_peering     = true
-  resource_group_1_name         = module.resource_group_1.resource_group_name
+  resource_group_1_name         = module.resource_group.resource_group_name
   diff_subs_resource_group_name = data.azurerm_resource_group.mgmt-rg.name
 
   alias_subs_id       = "82XXXXXXXXXXXXXXXXXXXXa80"
