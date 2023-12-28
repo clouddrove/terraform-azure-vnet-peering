@@ -12,19 +12,16 @@ module "resource_group" {
   location    = "North Europe"
 }
 
-
 #Vnet
 module "vnet" {
-  source  = "clouddrove/vnet/azure"
-  version = "1.0.3"
-
+  source              = "clouddrove/vnet/azure"
+  version             = "1.0.3"
   name                = "app"
   environment         = "test"
   resource_group_name = module.resource_group.resource_group_name
   location            = module.resource_group.resource_group_location
   address_space       = "10.0.0.0/16"
 }
-
 
 provider "azurerm" {
   alias = "mgmt"
@@ -44,8 +41,7 @@ data "azurerm_virtual_network" "mgmt-staging-vnet" {
 }
 
 module "vnet_peering" {
-  source = "../.."
-
+  source                        = "../.."
   enabled_diff_subs_peering     = true
   resource_group_1_name         = module.resource_group.resource_group_name
   diff_subs_resource_group_name = data.azurerm_resource_group.mgmt-rg.name
@@ -55,7 +51,6 @@ module "vnet_peering" {
   vnet_1_id           = module.vnet.vnet_id[0]
   vnet_diff_subs_name = data.azurerm_virtual_network.mgmt-staging-vnet.name
   vnet_diff_subs_id   = data.azurerm_virtual_network.mgmt-staging-vnet.id
-
 }
 
 

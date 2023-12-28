@@ -15,9 +15,12 @@ github_repo: clouddrove/terraform-azure-vnet-peering
 
 # Badges to display
 badges:
-  - name: "Terraform"
-    image: "https://img.shields.io/badge/Terraform-v1.1.7-green"
-    url: "https://www.terraform.io"
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/clouddrove/terraform-azure-vnet-peering.svg"
+    url: "https://github.com/clouddrove/terraform-azure-vnet-peering/releases/latest"
+  - name: "tfsec"
+    image: "https://github.com/clouddrove/terraform-azure-vnet-peering/actions/workflows/tfsec.yml/badge.svg"
+    url: "https://github.com/clouddrove/terraform-azure-vnet-peering/actions/workflows/tfsec.yml"
   - name: "Licence"
     image: "https://img.shields.io/badge/License-APACHE-blue.svg"
     url: "LICENSE.md"
@@ -35,35 +38,35 @@ usage: |-
   Here are some examples of how you can use this module in your inventory structure:
   ### Default vnet-peering
   ```hcl
-  module "vnet_peering" {
-   source                        = "clouddrove/vnet-peering/azure"
-   version                       = "1.0.0"
-   enabled_peering               = true
-   resource_group_1_name         = module.resource_group_1.resource_group_name
-   resource_group_2_name         = module.resource_group_2.resource_group_name
+     module "vnet_peering" {
+     source                        = "clouddrove/vnet-peering/azure"
+     version                       = "1.0.0"
+     enabled_peering               = true
+     resource_group_1_name         = module.resource_group_1.resource_group_name
+     resource_group_2_name         = module.resource_group_2.resource_group_name
 
-   different_rg                  = true
-   vnet_1_name                   = module.vnet.vnet_name[0]
-   vnet_1_id                     = module.vnet.vnet_id[0]
-   vnet_2_name                   = module.vnet_remote.vnet_name[0]
-   vnet_2_id                     = module.vnet_remote.vnet_id[0]
-  }
-   ```
+     different_rg                  = true
+     vnet_1_name                   = module.vnet.vnet_name[0]
+     vnet_1_id                     = module.vnet.vnet_id[0]
+     vnet_2_name                   = module.vnet_remote.vnet_name[0]
+     vnet_2_id                     = module.vnet_remote.vnet_id[0]
+    }
+  ```
 
-    ### vnet-peering in different subscription
+  ### vnet-peering in different subscription
   ```hcl
-  module "vnet_peering" {
-   source                        = "clouddrove/vnet-peering/azure"
-   version                       = "1.0.0"
-   enabled_diff_subs_peering     = true
-   resource_group_1_name         = module.resource_group_1.resource_group_name
-   diff_subs_resource_group_name = data.azurerm_resource_group.mgmt-rg.name
+     module "vnet_peering" {
+     source                        = "clouddrove/vnet-peering/azure"
+     version                       = "1.0.0"
+     enabled_diff_subs_peering     = true
+     resource_group_1_name         = module.resource_group_1.resource_group_name
+     diff_subs_resource_group_name = data.azurerm_resource_group.mgmt-rg.name
 
-   alias_subs_id                 = "82XXXXXXXXXXXXXXXXXXXXa80"
-   vnet_1_name                   = module.vnet.vnet_name[0]
-   vnet_1_id                     = module.vnet.vnet_id[0]
-   vnet_diff_subs_name           = data.azurerm_virtual_network.mgmt-staging-vnet.name
-   vnet_diff_subs_id             = data.azurerm_virtual_network.mgmt-staging-vnet.id
-  }
-   ```
+     alias_subs_id                 = "82XXXXXXXXXXXXXXXXXXXXa80"
+     vnet_1_name                   = module.vnet.vnet_name[0]
+     vnet_1_id                     = module.vnet.vnet_id[0]
+     vnet_diff_subs_name           = data.azurerm_virtual_network.mgmt-staging-vnet.name
+     vnet_diff_subs_id             = data.azurerm_virtual_network.mgmt-staging-vnet.id
+    }
+ ```
 
