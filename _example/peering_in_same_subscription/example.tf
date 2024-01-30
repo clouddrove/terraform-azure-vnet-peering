@@ -45,7 +45,7 @@ module "vnet_remote" {
   environment         = "test"
   resource_group_name = module.resource_group_2.resource_group_name
   location            = module.resource_group_2.resource_group_location
-  address_spaces       = ["20.0.0.0/16"]
+  address_spaces      = ["20.0.0.0/16"]
 }
 
 module "vnet_peering" {
