@@ -68,5 +68,19 @@ usage: |-
      vnet_diff_subs_name           = data.azurerm_virtual_network.mgmt-staging-vnet.name
      vnet_diff_subs_id             = data.azurerm_virtual_network.mgmt-staging-vnet.id
     }
- ```
+  ```
+  ### vnet-peering in for one way.
+  ```hcl
+    module "vnet_peering" {
+    source                 = "../.."
+    enable_one_way_peering = true
+    resource_group_1_name  = module.resource_group.resource_group_name
+    resource_group_2_name  = data.azurerm_resource_group.mgmt-rg.name
+    different_rg           = true
 
+    vnet_1_name = module.vnet.vnet_name[0]
+    vnet_1_id   = module.vnet.vnet_id[0]
+    vnet_2_name = data.azurerm_virtual_network.mgmt-staging-vnet.name
+    vnet_2_id   = data.azurerm_virtual_network.mgmt-staging-vnet.id
+    }
+  ```

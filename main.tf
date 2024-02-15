@@ -1,7 +1,7 @@
 
 # enable global peering between the two virtual network
 resource "azurerm_virtual_network_peering" "peering" {
-  count                        = var.enabled_peering || var.enabled_diff_subs_peering ? 1 : 0
+  count                        = var.enable && var.enabled_peering || var.enable && var.enabled_diff_subs_peering || var.enable && var.enable_one_way_peering ? 1 : 0
   name                         = var.enabled_diff_subs_peering == false ? format("%s-peering-%s", var.vnet_1_name, var.vnet_2_name) : format("%s-peering-%s", var.vnet_1_name, var.vnet_diff_subs_name)
   resource_group_name          = var.resource_group_1_name
   virtual_network_name         = var.vnet_1_name
@@ -12,9 +12,10 @@ resource "azurerm_virtual_network_peering" "peering" {
   use_remote_gateways          = var.use_remote_gateways_vnet1
 }
 
+
 # enable global peering between the two virtual network
 resource "azurerm_virtual_network_peering" "peering_back" {
-  count                        = var.enabled_peering ? 1 : 0
+  count                        = var.enable && var.enabled_peering ? 1 : 0
   name                         = format("%s-peering-%s", var.vnet_2_name, var.vnet_1_name)
   resource_group_name          = var.different_rg ? var.resource_group_2_name : var.resource_group_1_name
   virtual_network_name         = var.vnet_2_name
@@ -34,7 +35,7 @@ provider "azurerm" {
 # enable global peering between the two virtual network
 resource "azurerm_virtual_network_peering" "peering_back_diff_subs" {
   provider                     = azurerm.peer
-  count                        = var.enabled_diff_subs_peering ? 1 : 0
+  count                        = var.enable && var.enabled_diff_subs_peering ? 1 : 0
   name                         = format("%s-peering-%s", var.vnet_diff_subs_name, var.vnet_1_name)
   resource_group_name          = var.diff_subs_resource_group_name
   virtual_network_name         = var.vnet_diff_subs_name

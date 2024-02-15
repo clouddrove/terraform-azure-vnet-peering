@@ -1,8 +1,20 @@
+variable "enable" {
+  type        = bool
+  default     = true
+  description = "Flag to control the module creation"
+}
+
 ## peering
 variable "enabled_peering" {
   type        = bool
   default     = false
   description = "Set to false to prevent the module from creating any resources."
+}
+
+variable "enable_one_way_peering" {
+  type        = bool
+  default     = false
+  description = "Set to false to prevent the module from creating any resources for single side peering"
 }
 
 variable "vnet_1_name" {
