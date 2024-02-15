@@ -46,7 +46,7 @@ module "vnet_peering" {
   resource_group_1_name         = module.resource_group.resource_group_name
   diff_subs_resource_group_name = data.azurerm_resource_group.mgmt-rg.name
 
-  alias_subs_id       = "068245d4-3c94-42fe-9c4d-9e5e1cabc60c"
+  alias_subs_id       = "068888******c"
   vnet_1_name         = module.vnet.vnet_name
   vnet_1_id           = module.vnet.vnet_id
   vnet_diff_subs_name = data.azurerm_virtual_network.mgmt-staging-vnet.name
