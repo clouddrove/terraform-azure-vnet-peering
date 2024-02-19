@@ -6,7 +6,7 @@ module "resource_group" {
   source  = "clouddrove/resource-group/azure"
   version = "1.0.2"
 
-  name        = "app-vnet"
+  name        = "app-vnet2"
   environment = "test"
   label_order = ["name", "environment"]
   location    = "Canada Central"
@@ -20,13 +20,13 @@ module "vnet" {
   environment         = "test"
   resource_group_name = module.resource_group.resource_group_name
   location            = module.resource_group.resource_group_location
-  address_spaces      = ["10.1.0.0/16"]
+  address_spaces      = ["10.2.0.0/16"]
 }
 
 provider "azurerm" {
   alias = "mgmt"
   features {}
-  subscription_id = "0*****0c"
+  subscription_id = "****bc60c"
 }
 
 data "azurerm_resource_group" "mgmt-rg" {
@@ -41,16 +41,16 @@ data "azurerm_virtual_network" "mgmt-staging-vnet" {
 }
 
 module "vnet_peering" {
-  source                        = "../.."
-  enabled_diff_subs_peering     = true
-  resource_group_1_name         = module.resource_group.resource_group_name
-  diff_subs_resource_group_name = data.azurerm_resource_group.mgmt-rg.name
+  source                 = "../.."
+  enable_one_way_peering = true
+  resource_group_1_name  = module.resource_group.resource_group_name
+  resource_group_2_name  = data.azurerm_resource_group.mgmt-rg.name
+  different_rg           = true
 
-  alias_subs_id       = "068888******c"
-  vnet_1_name         = module.vnet.vnet_name
-  vnet_1_id           = module.vnet.vnet_id
-  vnet_diff_subs_name = data.azurerm_virtual_network.mgmt-staging-vnet.name
-  vnet_diff_subs_id   = data.azurerm_virtual_network.mgmt-staging-vnet.id
+  vnet_1_name = module.vnet.vnet_name
+  vnet_1_id   = module.vnet.vnet_id
+  vnet_2_name = data.azurerm_virtual_network.mgmt-staging-vnet.name
+  vnet_2_id   = data.azurerm_virtual_network.mgmt-staging-vnet.id
 }
 
 

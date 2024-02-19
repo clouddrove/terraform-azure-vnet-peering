@@ -1,33 +1,7 @@
-#Module      : LABEL
-#Description : Terraform label module variable
-variable "name" {
-  type        = string
-  default     = ""
-  description = "Name  (e.g. `app` or `cluster`)."
-}
-
-variable "environment" {
-  type        = string
-  default     = ""
-  description = "Environment (e.g. `prod`, `dev`, `staging`)."
-}
-
-variable "repository" {
-  type        = string
-  default     = ""
-  description = "Terraform current module repo"
-}
-
-variable "label_order" {
-  type        = list(any)
-  default     = []
-  description = "Label order, e.g. sequence of application name and environment `name`,`environment`,'attribute' [`webserver`,`qa`,`devops`,`public`,] ."
-}
-
-variable "attributes" {
-  type        = list(string)
-  default     = []
-  description = "Additional attributes (e.g. `1`)."
+variable "enable" {
+  type        = bool
+  default     = true
+  description = "Flag to control the module creation"
 }
 
 ## peering
@@ -37,27 +11,33 @@ variable "enabled_peering" {
   description = "Set to false to prevent the module from creating any resources."
 }
 
+variable "enable_one_way_peering" {
+  type        = bool
+  default     = false
+  description = "Set to false to prevent the module from creating any resources for single side peering"
+}
+
 variable "vnet_1_name" {
   type        = string
-  default     = ""
+  default     = null
   description = "The name of the virtual network. Changing this forces a new resource to be created."
 }
 
 variable "vnet_2_id" {
   type        = string
-  default     = ""
+  default     = null
   description = "The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created."
 }
 
 variable "vnet_1_id" {
   type        = string
-  default     = ""
+  default     = null
   description = "The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created."
 }
 
 variable "vnet_2_name" {
   type        = string
-  default     = ""
+  default     = null
   description = "The name of the remote virtual network."
 }
 
@@ -121,13 +101,13 @@ variable "use_remote_gateways_vnet_diff_subs" {
 
 variable "resource_group_1_name" {
   type        = string
-  default     = ""
+  default     = null
   description = "The name of 1st existing resource group to be imported."
 }
 
 variable "resource_group_2_name" {
   type        = string
-  default     = ""
+  default     = null
   description = "The name of 2nd existing resource group to be imported."
 }
 
@@ -143,22 +123,22 @@ variable "enabled_diff_subs_peering" {
 }
 variable "vnet_diff_subs_name" {
   type        = string
-  default     = ""
+  default     = null
   description = "The name of the remote virtual network."
 }
 variable "alias_subs_id" {
   type        = string
-  default     = ""
+  default     = null
   description = "Alias for remote provider in module."
 }
 variable "diff_subs_resource_group_name" {
   type        = string
-  default     = ""
+  default     = null
   description = "The name of remote resource group to be imported."
 }
 
 variable "vnet_diff_subs_id" {
   type        = string
-  default     = ""
+  default     = null
   description = "The id of the remote virtual network."
 }

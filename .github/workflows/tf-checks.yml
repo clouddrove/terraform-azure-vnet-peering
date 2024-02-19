@@ -1,0 +1,26 @@
+name: tf-checks
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  basic-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@1.2.1
+    with:
+      working_directory: './_example/basic/'
+
+  complete-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@1.2.1
+    with:
+      working_directory: './_example/complete/'
+  
+  peering_in_diff_subscription:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@1.2.1
+    with:
+      working_directory: './_example/peering_in_diff_subscription/'
+
+  one_way_peering:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@1.2.1
+    with:
+      working_directory: './_example/one_way_peering/' 
