@@ -26,7 +26,7 @@ module "vnet" {
 provider "azurerm" {
   alias = "mgmt"
   features {}
-  subscription_id = "068245d4-3c94-42fe-9c4d-9e5e1cabc60c"
+  subscription_id = "0*****0c"
 }
 
 data "azurerm_resource_group" "mgmt-rg" {
