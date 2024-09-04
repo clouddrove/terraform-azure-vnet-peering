@@ -1,0 +1,16 @@
+name: tf-checks
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  peering_in_diff_subscription-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@1.2.7
+    with:
+      working_directory: './examples/peering_in_diff_subscription/'
+
+  peering_in_same_subscription-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@1.2.7
+    with:
+      working_directory: './examples/peering_in_same_subscription/'
