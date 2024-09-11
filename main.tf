@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 3.0.0"
+    }
+  }
+}
 
 # enable global peering between the two virtual network
 resource "azurerm_virtual_network_peering" "peering" {
