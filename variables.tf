@@ -120,7 +120,7 @@ variable "vnet_diff_subs_name" {
 }
 variable "alias_subs_id" {
   type        = string
-  default     = "000000-11111-1223-XXX-XXXXXXXXXXXX"
+  default     = ""
   description = "Alias for remote provider in module."
 }
 variable "diff_subs_resource_group_name" {
