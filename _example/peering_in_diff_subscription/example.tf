@@ -57,5 +57,3 @@ module "vnet_peering" {
   vnet_diff_subs_id   = data.azurerm_virtual_network.mgmt-staging-vnet.id
 
 }
-
-
