@@ -53,6 +53,7 @@ module "vnet_peering" {
   source = "../.."
 
   enabled_peering       = true
+  alias_subs_id         = "000000-11111-1223-XXX-XXXXXXXXXXXX"
   resource_group_1_name = module.resource_group_1.resource_group_name
   resource_group_2_name = module.resource_group_2.resource_group_name
 
