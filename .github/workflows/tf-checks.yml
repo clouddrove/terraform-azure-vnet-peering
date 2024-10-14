@@ -5,7 +5,11 @@ on:
   pull_request:
   workflow_dispatch:
 jobs:
-  tf-checks-azure-managed-example:
+  peering-in-diff-subscription-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@master
     with:
-      working_directory: './examples/'
+      working_directory: './examples/peering_in_diff_subscription/'
+  peering-in-same-subscription-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@master
+    with:
+      working_directory: './examples/peering_in_same_subscription/'

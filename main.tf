@@ -1,11 +1,3 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = ">= 3.0.0"
-    }
-  }
-}
 
 # enable global peering between the two virtual network
 resource "azurerm_virtual_network_peering" "peering" {
@@ -37,7 +29,7 @@ resource "azurerm_virtual_network_peering" "peering_back" {
 provider "azurerm" {
   alias = "peer"
   features {}
-  subscription_id = var.alias_subs_id
+  subscription_id = "068245d4-3c94-42fe-9c4d-9e5e1cabc60c"
 }
 
 # enable global peering between the two virtual network
