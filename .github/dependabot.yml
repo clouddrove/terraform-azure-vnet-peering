@@ -10,10 +10,10 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "terraform" # See documentation for possible values
-    directory: "examples/peering_in_diff_subscription" # Location of package manifests
+    directory: "_example/peering_in_diff_subscription" # Location of package manifests
     schedule:
       interval: "weekly"
   - package-ecosystem: "terraform" # See documentation for possible values
-    directory: "examples/peering_in_same_subscription" # Location of package manifests
+    directory: "_example/peering_in_same_subscription" # Location of package manifests
     schedule:
       interval: "weekly"

@@ -1,6 +1,34 @@
 #Module      : LABEL
 #Description : Terraform label module variable
+variable "name" {
+  type        = string
+  default     = ""
+  description = "Name  (e.g. `app` or `cluster`)."
+}
 
+variable "environment" {
+  type        = string
+  default     = ""
+  description = "Environment (e.g. `prod`, `dev`, `staging`)."
+}
+
+variable "repository" {
+  type        = string
+  default     = ""
+  description = "Terraform current module repo"
+}
+
+variable "label_order" {
+  type        = list(any)
+  default     = []
+  description = "Label order, e.g. sequence of application name and environment `name`,`environment`,'attribute' [`webserver`,`qa`,`devops`,`public`,] ."
+}
+
+variable "attributes" {
+  type        = list(string)
+  default     = []
+  description = "Additional attributes (e.g. `1`)."
+}
 
 ## peering
 variable "enabled_peering" {
